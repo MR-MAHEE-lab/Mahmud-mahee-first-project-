@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>খবর Tv</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+            padding-bottom: 80px; /* Space for fixed bottom navbar */
+        }
+        /* Smooth scroll for trending topics */
+        #trending-topics-container {
+            scroll-behavior: smooth;
+        }
+        /* Stock ticker scroll */
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 20s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" class="min-h-screen flex flex-col items-center">
+
+    <!-- Header Section -->
+    <header class="w-full max-w-5xl bg-white sticky top-0 z-20 shadow-sm rounded-b-xl overflow-hidden mb-4">
+        <div class="flex items-center justify-between p-4 border-b border-gray-200">
+            <div class="flex items-center">
+                <img src="https://i.ibb.co/689fB23/IMG-20250915-WA0000.jpg" alt="খবর Tv Logo" class="h-10 w-auto rounded-lg">
+                <h1 class="text-2xl font-bold ml-2 text-yellow-800">খবর Tv</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-red-500 font-semibold px-3 py-1 bg-red-100 rounded-full text-sm">সরাসরি</a>
+                <i class="fa-solid fa-bell text-gray-500 text-lg"></i>
+                <i class="fa-solid fa-magnifying-glass text-gray-500 text-lg"></i>
+            </div>
+        </div>
+        <div class="p-2 bg-yellow-100 overflow-hidden relative">
+            <div class="ticker text-sm font-semibold text-gray-700">
+                শেয়ার বাজার: IFIC1STMF <i class="fa-solid fa-arrow-up text-green-600"></i> 0% &nbsp;&nbsp;|&nbsp;&nbsp; 
+                IFILISLMF1 <i class="fa-solid fa-arrow-up text-green-600"></i> 2.38% &nbsp;&nbsp;|&nbsp;&nbsp; 
+                ILFSL <i class="fa-solid fa-arrow-down text-red-600"></i> 0% &nbsp;&nbsp;|&nbsp;&nbsp; 
+                DSE30 <i class="fa-solid fa-arrow-up text-green-600"></i> 1.12%
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="w-full max-w-5xl px-4 md:px-0 flex-1">
+
+        <!-- Trending Topics -->
+        <div class="mb-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-2">ট্রেন্ডিং</h2>
+            <div id="trending-topics-container" class="flex gap-2 overflow-x-auto px-2 py-1 scrollbar-hide">
+                <!-- Trending topics buttons -->
+            </div>
+        </div>
+
+        <!-- News Grid -->
+        <div id="news-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+            <!-- News articles dynamically inserted -->
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-xl rounded-t-2xl p-4 flex justify-around items-center z-30">
+        <a href="#" class="flex flex-col items-center text-yellow-700 font-bold" data-filter="headlines">
+            <i class="fa-solid fa-list-ul text-2xl"></i>
+            <span class="text-xs mt-1">শিরোনাম</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500" data-filter="home">
+            <i class="fa-solid fa-house text-2xl"></i>
+            <span class="text-xs mt-1">মূল পাতা</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500" data-filter="recent">
+            <i class="fa-solid fa-clock-rotate-left text-2xl"></i>
+            <span class="text-xs mt-1">সাম্প্রতিক</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-gray-500" data-filter="videos">
+            <i class="fa-solid fa-video text-2xl"></i>
+            <span class="text-xs mt-1">ভিডিও</span>
+        </a>
+    </nav>
+
+</div>
+
+<script>
+    const newsContainer = document.getElementById('news-container');
+    const trendingTopicsContainer = document.getElementById('trending-topics-container');
+    const navLinks = document.querySelectorAll('nav a');
+
+    const allArticles = [
+        { title: "দুর্গাপূজার প্রস্তুতি", description: "আসন্ন দুর্গাপূজা উপলক্ষে প্রধান উপদেষ্টা ড. মুহাম্মদ ইউনূসের পরামর্শে পর্যায়ক্রমে পরিদর্শনে আসলেন সনাতন ধর্মীয় নেতারা।", url: "#", urlToImage: "https://placehold.co/600x400/D97706/ffffff?text=Image+1", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["headlines","home","recent","ধর্ম"] },
+        { title: "জুলাই সনদের ভিত্তিতে নির্বাচন", description: "দেশে চলমান রাজনৈতিক সংকট নিরসনের লক্ষ্যে জামায়াতের কর্মসূচি ঘোষণা।", url: "#", urlToImage: "https://placehold.co/600x400/92400E/ffffff?text=Image+2", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["headlines","home","recent","রাজনীতি"] },
+        { title: "আটা (প্যাকেট)", description: "৫২-৫৫ টাকা (কেজি)", url: "#", urlToImage: "https://placehold.co/600x400/FACC15/ffffff?text=Flour", source:{name:"বাজার দর"}, time:null, category:["home","বাজার"] },
+        { title: "সারাদেশে আজ মাঝারি থেকে ভারী বৃষ্টির সম্ভাবনা", description: "সারাদেশে আজ মাঝারি থেকে ভারী বৃষ্টির সম্ভাবনা।", url: "#", urlToImage: "https://placehold.co/600x400/FB923C/ffffff?text=Image+4", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["headlines","home","recent","আবহাওয়া"] },
+        { title: "ইটভাটা বিক্ষোভ", description: "গ্রামের পরিবেশ ও জলবায়ু পরিবর্তনের দাবিতে তারা বিক্ষোভ করেছে।", url: "#", urlToImage: "https://placehold.co/600x400/8c7ae6/ffffff?text=Video+1", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["videos","home","ভিডিও"] },
+        { title: "নদীতে মছনা মিলেছে", description: "নদীতে মছনা পাওয়া গেলে এলাকাবাসী পুলিশে খবর দেয়।", url: "#", urlToImage: "https://placehold.co/600x400/42a5f5/ffffff?text=Video+2", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["videos","home","ভিডিও"] },
+        { title: "ভালো চাকরির আশায় শহরহারা", description: "গ্রাম থেকে শহরে গিয়েও চাকরি না পাওয়ায় হতাশ।", url: "#", urlToImage: "https://placehold.co/600x400/66bb6a/ffffff?text=Video+3", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["videos","home","ভিডিও"] },
+        { title: "FIFA World Cup Qualifying", description: "Argentina beats Brazil in an exciting match.", url:"#", urlToImage:"https://placehold.co/600x400/ef5350/ffffff?text=World+Cup", source:{name:"Sports Tv"}, time:"১ ঘন্টা আগে", category:["home","sports"] },
+        { title: "New Study on Climate Change", description: "Scientists release a new study on the effects of climate change.", url:"#", urlToImage:"https://placehold.co/600x400/ffa726/ffffff?text=Climate+Change", source:{name:"Science Daily"}, time:"৩ ঘন্টা আগে", category:["home","science"] },
+    ];
+
+    const trendingTopics = [...new Set(allArticles.flatMap(a=>a.category).filter(c=>!["home","headlines","recent","videos"].includes(c)))];
+
+    function renderArticle(article){
+        const card = document.createElement('a');
+        card.href = article.url || '#';
+        card.target = "_blank";
+        card.rel = "noopener noreferrer";
+        const isMarket = article.source?.name==="বাজার দর";
+        card.className = isMarket?"flex items-center p-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500":"flex flex-col bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden group";
+
+        if(isMarket){
+            card.innerHTML = `
+                <img src="${article.urlToImage}" loading="lazy" alt="${article.title}" class="w-16 h-16 object-cover rounded-lg mr-4">
+                <div class="flex-1">
+                    <h2 class="text-xl font-bold text-gray-900 mb-1">${article.title}</h2>
+                    <p class="text-gray-700 text-sm">${article.description}</p>
+                </div>
+            `;
+        } else {
+            card.innerHTML = `
+                <div class="relative w-full overflow-hidden">
+                    <img src="${article.urlToImage || 'https://placehold.co/600x400/92400E/ffffff?text=No+Image'}" loading="lazy"
+                        alt="${article.title}" class="w-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 rounded-t-xl">
+                    <div class="absolute bottom-2 left-2 bg-white text-gray-800 text-xs font-semibold px-2 py-1 rounded-full shadow">
+                        ${article.time || ''}
+                    </div>
+                    <div class="absolute top-2 right-2 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow">
+                        <i class="fa-solid fa-thumbtack text-yellow-500"></i>
+                    </div>
+                </div>
+                <div class="p-4 flex-1 flex flex-col">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">${article.title}</h2>
+                    <p class="text-gray-700 text-sm flex-1 mb-4">${article.description}</p>
+                </div>
+            `;
+        }
+
+        newsContainer.appendChild(card);
+    }
+
+    function renderTrendingTopics(){
+        trendingTopicsContainer.innerHTML="";
+        trendingTopics.forEach(topic=>{
+            const btn=document.createElement('span');
+            btn.textContent=topic;
+            btn.className="bg-gray-200 text-gray-800 text-sm font-medium px-3 py-1 rounded-full cursor-pointer hover:bg-yellow-200 transition-colors duration-200";
+            btn.addEventListener('click', (e)=>{
+                filterArticles(topic);
+                trendingTopicsContainer.querySelectorAll('span').forEach(s=>s.classList.remove('bg-yellow-200'));
+                e.target.classList.add('bg-yellow-200');
+            });
+            trendingTopicsContainer.appendChild(btn);
+        });
+    }
+
+    function filterArticles(filter){
+        newsContainer.innerHTML="";
+        const filtered = allArticles.filter(a=>a.category.includes(filter));
+        filtered.forEach(renderArticle);
+        navLinks.forEach(link=>{
+            if(link.dataset.filter===filter){
+                link.classList.remove('text-gray-500'); link.classList.add('text-yellow-700','font-bold');
+            } else {
+                link.classList.remove('text-yellow-700','font-bold'); link.classList.add('text-gray-500');
+            }
+        });
+    }
+
+    navLinks.forEach(link=>link.addEventListener('click', e=>{
+        e.preventDefault();
+        filterArticles(e.currentTarget.dataset.filter);
+    }));
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        renderTrendingTopics();
+        filterArticles("home");
+    });
+</script>
+
+</body>
+</html>
