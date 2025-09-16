@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>খবর Tv</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #121212; /* Dark Gray / Black */
+    padding-bottom: 80px; /* Bottom nav space */
+  }
+
+  /* Updated Logo Style with Animation */
+  .logo {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #FFA500; /* লোগোর বেস কালার - কমলা */
+    display: inline-block;
+    padding: 10px 20px;
+    position: relative;
+    animation: logo3DAnim 3s ease-in-out infinite alternate; 
+    text-shadow: 
+      2px 2px 0 #FF8C00, 
+      4px 4px 0 #FF6347, 
+      6px 6px 0 #CD5C5C, 
+      0px 0px 15px rgba(255,140,0,0.7);
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+
+  @keyframes logo3DAnim {
+    0% {
+      text-shadow: 
+        2px 2px 0 #FF8C00, 
+        4px 4px 0 #FF6347, 
+        6px 6px 0 #CD5C5C, 
+        0px 0px 15px rgba(255,140,0,0.7);
+      transform: translateY(0);
+    }
+    50% {
+      text-shadow: 
+        1px 1px 0 #FF8C00, 
+        2px 2px 0 #FF6347, 
+        3px 3px 0 #CD5C5C, 
+        0px 0px 25px rgba(255,140,0,0.9);
+      transform: translateY(-3px);
+    }
+    100% {
+      text-shadow: 
+        2px 2px 0 #FF8C00, 
+        4px 4px 0 #FF6347, 
+        6px 6px 0 #CD5C5C, 
+        0px 0px 15px rgba(255,140,0,0.7);
+      transform: translateY(0);
+    }
+  }
+
+  .logo::after {
+    content: "Tv";
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: #FF4500;
+    padding: 2px 6px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    animation: tvPulse 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes tvPulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 8px rgba(255,69,0,0.8);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .logo {
+      font-size: 48px;
+    }
+    .logo::after {
+      font-size: 18px;
+      bottom: 8px;
+      right: 8px;
+    }
+  }
+
+  /* Ticker animation */
+  .ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker 20s linear infinite;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .trending-active {
+    background-color: #FF4500; 
+    color: #000000; 
+  }
+
+  .news-card h2 { color: #fff; }
+  .news-card p { color: #ccc; }
+
+  .news-card {
+    background-color: #2c2c2c;
+    border: 1px solid #3d3d3d;
+  }
+
+  .news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  @media (min-width: 768px) {
+    .news-card {
+      padding: 24px;
+    }
+  }
+
+  .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #FFD700;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+
+<div id="app" class="min-h-screen flex flex-col items-center">
+
+  <div id="loading-spinner" class="fixed inset-0 flex items-center justify-center bg-[#121212] z-50 transition-opacity duration-500">
+    <div class="spinner"></div>
+  </div>
+
+  <header class="w-full max-w-5xl sticky top-0 z-20 shadow-lg rounded-b-xl overflow-hidden mb-4 border-2 border-[#FF4500] bg-black text-white">
+    <div class="flex items-center justify-between p-4 border-b border-[#FF4500]">
+      <div class="flex items-center">
+        <div class="logo">খবর</div>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <a href="#" class="text-white font-semibold px-3 py-1 bg-red-600 rounded-full text-sm border border-[#FFD700]">সরাসরি</a>
+        <i class="fa-solid fa-bell text-white text-lg hover:text-yellow-300 cursor-pointer"></i>
+        <i class="fa-solid fa-magnifying-glass text-white text-lg hover:text-yellow-300 cursor-pointer"></i>
+      </div>
+    </div>
+
+    <div class="p-2 bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#FF4500] overflow-hidden relative border-t border-[#FF4500]">
+      <div class="ticker text-sm font-semibold text-white">
+        শেয়ার বাজার: IFIC1STMF <i class="fa-solid fa-arrow-up text-green-400"></i> 0% &nbsp;&nbsp;|&nbsp;&nbsp; 
+        IFILISLMF1 <i class="fa-solid fa-arrow-up text-green-400"></i> 2.38% &nbsp;&nbsp;|&nbsp;&nbsp; 
+        ILFSL <i class="fa-solid fa-arrow-down text-red-400"></i> 0% &nbsp;&nbsp;|&nbsp;&nbsp; 
+        DSE30 <i class="fa-solid fa-arrow-up text-green-400"></i> 1.12%
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full max-w-5xl px-4 md:px-0 flex-1">
+    <div class="mb-6">
+      <h2 class="text-xl font-bold text-white mb-2">ট্রেন্ডিং</h2>
+      <div id="trending-topics-container" class="flex gap-2 overflow-x-auto px-2 py-1 scrollbar-hide"></div>
+    </div>
+
+    <div id="news-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"></div>
+  </main>
+
+  <nav class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-black via-[#FF8C00] to-[#FF4500] backdrop-blur-sm shadow-xl rounded-t-2xl p-4 flex justify-around items-center z-30 border-t-2 border-[#FFD700]">
+    <a href="#" class="flex flex-col items-center text-white font-bold" data-filter="headlines">
+      <i class="fa-solid fa-list-ul text-2xl sm:text-3xl"></i>
+      <span class="text-[10px] mt-1">শিরোনাম</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-white" data-filter="home">
+      <i class="fa-solid fa-house text-2xl sm:text-3xl"></i>
+      <span class="text-[10px] mt-1">মূল পাতা</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-white" data-filter="recent">
+      <i class="fa-solid fa-clock-rotate-left text-2xl sm:text-3xl"></i>
+      <span class="text-[10px] mt-1">সাম্প্রতিক</span>
+    </a>
+    <a href="#" class="flex flex-col items-center text-white" data-filter="videos">
+      <i class="fa-solid fa-video text-2xl sm:text-3xl"></i>
+      <span class="text-[10px] mt-1">ভিডিও</span>
+    </a>
+  </nav>
+
+</div>
+
+<script>
+const newsContainer = document.getElementById('news-container');
+const trendingTopicsContainer = document.getElementById('trending-topics-container');
+const navLinks = document.querySelectorAll('nav a');
+const loadingSpinner = document.getElementById('loading-spinner');
+
+const allArticles = [
+  { title: "দুর্গাপূজার প্রস্তুতি", description: "আসন্ন দুর্গাপূজা উপলক্ষে প্রধান উপদেষ্টা ড. মুহাম্মদ ইউনূসের পরামর্শে পর্যায়ক্রমে পরিদর্শনে আসলেন সনাতন ধর্মীয় নেতারা।", url: "#", urlToImage: "https://placehold.co/600x400/D97706/ffffff?text=Image+1", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["headlines","home","recent","ধর্ম"] },
+  { title: "জুলাই সনদের ভিত্তিতে নির্বাচন", description: "দেশে চলমান রাজনৈতিক সংকট নিরসনের লক্ষ্যে জামায়াতের কর্মসূচি ঘোষণা।", url: "#", urlToImage: "https://placehold.co/600x400/92400E/ffffff?text=Image+2", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["headlines","home","recent","রাজনীতি"] },
+  { title: "আটা (প্যাকেট)", description: "৫২-৫৫ টাকা (কেজি)", url: "#", urlToImage: "https://placehold.co/600x400/FACC15/ffffff?text=Flour", source:{name:"বাজার দর"}, time:null, category:["home","বাজার"] },
+  { title: "সারাদেশে আজ মাঝারি থেকে ভারী বৃষ্টির সম্ভাবনা", description: "সারাদেশে আজ মাঝারি থেকে ভারী বৃষ্টির সম্ভাবনা।", url: "#", urlToImage: "https://placehold.co/600x400/FB923C/ffffff?text=Image+4", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["headlines","home","recent","আবহাওয়া"] },
+  { title: "ইটভাটা বিক্ষোভ", description: "গ্রামের পরিবেশ ও জলবায়ু পরিবর্তনের দাবিতে তারা বিক্ষোভ করেছে।", url: "#", urlToImage: "https://placehold.co/600x400/8c7ae6/ffffff?text=Video+1", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["videos","home","ভিডিও"] },
+  { title: "নদীতে মছনা মিলেছে", description: "নদীতে মছনা পাওয়া গেলে এলাকাবাসী পুলিশে খবর দেয়।", url: "#", urlToImage: "https://placehold.co/600x400/42a5f5/ffffff?text=Video+2", source:{name:"খবর Tv"}, time:"২ ঘন্টা আগে", category:["videos","home","ভিডিও"] },
+];
+
+const trendingTopics = [...new Set(allArticles.flatMap(a=>a.category).filter(c=>!["home","headlines","recent","videos"].includes(c)))];
+
+function renderArticle(article){
+  const isMarket = article.source?.name === "বাজার দর";
+  const cardClass = isMarket ? 
+    "flex items-center p-4 rounded-xl shadow-md transition-all duration-500 news-card" :
+    "flex flex-col rounded-xl shadow-md transition-all duration-500 overflow-hidden group news-card";
+  
+  const contentHTML = isMarket ? `
+    <img src="${article.urlToImage}" loading="lazy" alt="${article.title}" class="w-16 h-16 object-cover rounded-lg mr-4">
+    <div class="flex-1">
+      <h2 class="text-xl font-bold mb-1">${article.title}</h2>
+      <p class="text-sm">${article.description}</p>
+    </div>
+  ` : `
+    <div class="relative w-full overflow-hidden">
+      <img src="${article.urlToImage || 'https://placehold.co/600x400/92400E/ffffff?text=No+Image'}" loading="lazy"
+        alt="${article.title}" class="w-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105 rounded-t-xl">
+      <div class="absolute bottom-2 left-2 bg-white text-gray-800 text-xs font-semibold px-2 py-1 rounded-full shadow">
+        ${article.time || ''}
+      </div>
+      <div class="absolute top-2 right-2 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow">
+        <i class="fa-solid fa-thumbtack text-yellow-500"></i>
+      </div>
+    </div>
+    <div class="p-4 flex-1 flex flex-col">
+      <h2 class="text-xl font-bold mb-2">${article.title}</h2>
+      <p class="text-sm flex-1 mb-4">${article.description}</p>
+    </div>
+  `;
+
+  const card = document.createElement('a');
+  card.href = article.url || '#';
+  card.target = "_blank";
+  card.rel = "noopener noreferrer";
+  card.className = cardClass;
+  card.innerHTML = contentHTML;
+  newsContainer.appendChild(card);
+}
+
+function renderTrendingTopics(){
+  trendingTopicsContainer.innerHTML="";
+  trendingTopics.forEach(topic=>{
+    const btn=document.createElement('span');
+    btn.textContent=topic;
+    btn.className="bg-gray-200 text-gray-800 text-sm font-medium px-3 py-1 rounded-full cursor-pointer hover:bg-yellow-200 transition-colors duration-200";
+    btn.addEventListener('click', (e)=>{
+      filterArticles(topic);
+      trendingTopicsContainer.querySelectorAll('span').forEach(s=>s.classList.remove('trending-active'));
+      e.target.classList.add('trending-active');
+    });
+    trendingTopicsContainer.appendChild(btn);
+  });
+}
+
+function filterArticles(filter){
+  newsContainer.innerHTML="";
+  const filtered = filter === 'home' ? allArticles : allArticles.filter(a=>a.category.includes(filter));
+  filtered.forEach(renderArticle);
+  navLinks.forEach(link=>{
+    if(link.dataset.filter===filter){
+      link.classList.add('font-bold', 'text-yellow-700');
+      link.classList.remove('text-white');
+    } else {
+      link.classList.remove('font-bold', 'text-yellow-700');
+      link.classList.add('text-white');
+    }
+  });
+}
+
+navLinks.forEach(link=>link.addEventListener('click', e=>{
+  e.preventDefault();
+  filterArticles(e.currentTarget.dataset.filter);
+}));
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderTrendingTopics();
+  filterArticles("home");
+
+  setTimeout(() => {
+    loadingSpinner.style.opacity = '0';
+    setTimeout(() => {
+      loadingSpinner.style.display = 'none';
+    }, 500);
+  }, 1000);
+});
+</script>
+
+</body>
+</html>
