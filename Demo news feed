@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>খবর Tv</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Body White Background */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff; /* White */
+      padding-bottom: 80px; /* Bottom nav space */
+    }
+
+    /* Updated Logo Style */
+    .logo {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 28px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      position: relative;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05);
+      text-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+    .logo .tv {
+      font-size: 12px;
+      background: #000;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    /* News Ticker */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      color: white;
+    }
+    .ticker {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 18s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* News Card */
+    .news-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #f9fafb; /* Light Gray for white theme */
+      border: 1px solid #e5e7eb;
+    }
+    .news-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .news-img {
+      transition: transform 0.3s ease;
+    }
+    .news-card:hover .news-img {
+      transform: scale(1.05);
+    }
+
+    /* Trending Topics */
+    .trending-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: #f3f4f6;
+      color: #374151;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+    .trending-btn:hover {
+      background: #facc15;
+      color: #000;
+    }
+    .trending-active {
+      background: #facc15;
+      color: #000;
+      font-weight: bold;
+    }
+
+    /* Footer White */
+    footer {
+      background: #ffffff;
+      color: #111827;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      border: 4px solid rgba(0,0,0,0.1);
+      border-left-color: #facc15;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      animation: spin 1s linear infinite;
+      margin: auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="shadow-md sticky top-0 z-50 bg-white">
+    <nav class="flex justify-between items-center p-4">
+      <div class="logo">খবর <span class="tv">Tv</span></div>
+      <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
+        <li><a href="#" class="hover:text-yellow-600">প্রথমপাতা</a></li>
+        <li><a href="#" class="hover:text-yellow-600">বাংলাদেশ</a></li>
+        <li><a href="#" class="hover:text-yellow-600">আন্তর্জাতিক</a></li>
+        <li><a href="#" class="hover:text-yellow-600">খেলাধুলা</a></li>
+        <li><a href="#" class="hover:text-yellow-600">বিনোদন</a></li>
+      </ul>
+      <button class="md:hidden text-2xl">☰</button>
+    </nav>
+  </header>
+
+  <!-- News Ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      🔥 ব্রেকিং নিউজ: বাংলাদেশে নতুন অর্থনৈতিক পরিকল্পনা ঘোষণা... • ফুটবলে বাংলাদেশের ঐতিহাসিক জয়... • বিনোদনে নতুন সিনেমা মুক্তি পাচ্ছে আগামী সপ্তাহে...
+    </div>
+  </div>
+
+  <!-- Trending Topics -->
+  <section class="px-4 py-6">
+    <h2 class="text-xl font-bold mb-3 text-gray-900">ট্রেন্ডিং টপিকস</h2>
+    <div class="flex flex-wrap gap-3">
+      <button class="trending-btn trending-active">সব</button>
+      <button class="trending-btn">বাংলাদেশ</button>
+      <button class="trending-btn">আন্তর্জাতিক</button>
+      <button class="trending-btn">খেলাধুলা</button>
+      <button class="trending-btn">বিনোদন</button>
+    </div>
+  </section>
+
+  <!-- News Grid -->
+  <main class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+    <article class="news-card rounded-xl overflow-hidden">
+      <img src="https://picsum.photos/400/250?1" alt="news" class="news-img w-full h-48 object-cover">
+      <div class="p-4">
+        <h3 class="font-bold text-lg mb-2 text-gray-900">বাংলাদেশে অর্থনৈতিক উন্নয়ন</h3>
+        <p class="text-gray-600 text-sm">আজ প্রধানমন্ত্রী নতুন অর্থনৈতিক পরিকল্পনা ঘোষণা করেছেন যা দেশের উন্নয়নে বড় ভূমিকা রাখবে।</p>
+      </div>
+    </article>
+
+    <article class="news-card rounded-xl overflow-hidden">
+      <img src="https://picsum.photos/400/250?2" alt="news" class="news-img w-full h-48 object-cover">
+      <div class="p-4">
+        <h3 class="font-bold text-lg mb-2 text-gray-900">ফুটবলে বাংলাদেশের জয়</h3>
+        <p class="text-gray-600 text-sm">বিশ্বকাপে যোগ্যতা অর্জনের ম্যাচে বাংলাদেশ ঐতিহাসিক জয় পেয়েছে।</p>
+      </div>
+    </article>
+
+    <article class="news-card rounded-xl overflow-hidden">
+      <img src="https://picsum.photos/400/250?3" alt="news" class="news-img w-full h-48 object-cover">
+      <div class="p-4">
+        <h3 class="font-bold text-lg mb-2 text-gray-900">নতুন সিনেমা মুক্তি</h3>
+        <p class="text-gray-600 text-sm">আগামী সপ্তাহে ঢাকাই সিনেমায় নতুন চলচ্চিত্র মুক্তি পাচ্ছে।</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-6">
+    <p>&copy; 2025 খবর Tv | সর্বস্বত্ব সংরক্ষিত</p>
+  </footer>
+
+  <!-- Loader -->
+  <div id="loader" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    // Loader hide after page load
+    window.addEventListener("load", () => {
+      document.getElementById("loader").style.display = "none";
+    });
+
+    // Trending Filter Active Button
+    const btns = document.querySelectorAll(".trending-btn");
+    btns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        btns.forEach(b => b.classList.remove("trending-active"));
+        btn.classList.add("trending-active");
+      });
+    });
+  </script>
+</body>
+</html>
