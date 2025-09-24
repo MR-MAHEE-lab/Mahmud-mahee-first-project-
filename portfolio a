@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/24d6b3def1.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-900 text-white font-[Sen]">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-950 backdrop-blur-md p-4">
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center text-white w-11/12 mx-auto z-50">
+      <h1 class="text-3xl font-bold text-center lg:text-left">F R</h1>
+      <ul class="hidden lg:flex gap-4 text-lg">  
+        <li><a href="#" class="hover:text-gray-400">Home</a></li>
+        <li><a href="#" class="hover:text-gray-400">About</a></li>
+        <li><a href="#" class="hover:text-gray-400">Skill</a></li>
+        <li><a href="#" class="hover:text-gray-400">Education</a></li>
+        <li><a href="#" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="flex flex-col md:flex-row items-center justify-between px-8 md:px-20 py-16">
+    
+    <!-- Left Content -->
+    <div class="max-w-lg space-y-4">
+      <p class="text-lg font-semibold">Hello it's Me</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold">Faiyaz Ahmed</h1>
+      <h2 class="text-xl">And I'm <span class="text-blue-500 font-bold">A</span></h2>
+      <p class="text-gray-300">
+        Vero praesentium libero rerum est repellendus. Mollitia et ipsam qui ut at magnam enim.
+      </p>
+
+      <!-- Social Icons -->
+      <div class="flex space-x-4 pt-4">
+        <a href="#" class="text-xl hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="text-xl hover:text-blue-500"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="text-xl hover:text-blue-500"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-xl hover:text-blue-500"><i class="fab fa-x-twitter"></i></a>
+      </div>
+
+      <!-- Button -->
+      <div>
+        <a href="#" class="inline-block mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition">
+          Download CV
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Image -->
+    <div class="relative flex justify-center lg:justify-end w-full lg:w-1/2 mt-10 md:mt-0">
+      <img src="image/Polygon.png" alt="polygon shape" class="w-72 lg:w-96">
+      <img src="image/banner.png" alt="profile" class="absolute top-5 w-60 lg:w-80">
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-20 px-6 lg:px-20 bg-gray-900 text-white border-t border-blue-500">
+    <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
+
+      <!-- Left Image with Blue Circle -->
+       <div class="relative flex justify-center lg:justify-end w-full lg:w-1/2 mt-10 md:mt-0">
+      <img src="image/rouded.png" alt="polygon shape" class="w-72 lg:w-96">
+      <img src="image/banner.png" alt="profile" class="absolute top-5 w-60 lg:w-80">
+    </div>
+
+      <!-- Right Content -->
+      <div class="max-w-xl space-y-5">
+        <h2 class="text-3xl font-bold">About <span class="text-blue-500">Me</span></h2>
+        <h3 class="text-lg font-semibold">UX/UI Designer</h3>
+        <p class="text-gray-300">
+          Et blanditiis et neque provident soluta quibusdam. Ut optio nobis. Eligendi voluptas
+          qui maxime id quo culpa qui. Nihil error necessitatibus distinctio explicabo est.
+        </p>
+        <p class="text-gray-300">
+          Voluptates quas placeat. Quia aut vel ver harum illum eum. Nihil minima fugit fuga
+          tempore eum aut consequatur. Dolores totam minus ab soluta in temporibus fuga.
+        </p>
+        <p class="text-gray-300">
+          Quasert est sequi temporibus voluptatem. Dolore aut rerum enim aut suscipit
+          facere. Libero.
+        </p>
+
+        <!-- Button -->
+        <a href="#"
+           class="inline-block mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition">
+          See More
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
